@@ -1,0 +1,537 @@
+<!DOCTYPE HTML>
+<html lang="es-PE" class="fade">
+<!--
+  ^ a class of "fade" makes slides fade smoothly into one another
+ -->
+<!-- <html lang="en-US" class="nonumbers"> -->
+<!--
+  If you want no numbers on the slides add a "nonumbers" class
+  to the HTML element.
+  Adding a class of "fade" will make slides fade into another.
+-->
+<head>
+  <meta charset="UTF-8">
+  <title>Firefox Developer Edition e Introducción a BackboneJS</title>
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <link rel="stylesheet" href="themes/mozilla/styles/style.css">
+  <style>
+    .slide code {
+      font-size: 23px;
+      line-height: 1.6em;
+    }
+  </style>
+</head>
+<body class="list">
+  <header class="caption">
+    <h1>Firefox Developer Edition e Introducción a BackboneJS</h1>
+    <p class="footer">
+      Angel Fernando Quiroz Campos,
+      <a href="https://twitter.com/AngelFQC">@AngelFQC</a>,
+      <a href="mailto:angelfqc@mozilla.pe">angelfqc@mozilla.pe</a>
+    </p>
+  </header>
+
+  <aside class="talkdescription">
+    <p>
+      Esta presentación usa el sistema shower, puedes pasar por encima de cada diapositiva para ver las notas y hacer
+      clic en cualquiera de ellas para ir al modo de presentación. Después puedes usar las teclas para navegar
+      <button onclick="goFullScreen()">Empezar</button>
+    </p>
+    <p class="abstract">
+      <strong>Abstract: </strong>
+      Firefox Developer Edition es una versión de Firefox que agrega nuevas y experimentales carecterísticas que
+      simplifican en proceso de desarrollo Web, ya sea de aplicaciones Web para escritorio como aplicaciones web
+      móviles. En este taller se mostrarán a los nuevos Desarrolladores Web cómo usar las herramientas de desarrollo
+      que se encuentran actualmente  en Firefox Developer Edition y a los desarrolladores experimentados cómo mejorar
+      el proceso de desarrolo de sus páginas o applicaciones Web con las DevTools de Firefox.
+    </p>
+  </aside>
+
+  <div id="cover" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Firefox Developer Edition e Introducción a BackboneJS</h2>
+      </header>
+      <img src="pictures/dev-edition/cover.jpg"
+           class="middle"
+           alt="Firefox Developer Edition!">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="application-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Aplicación a desarrollar</h2>
+      </header>
+      <img src="pictures/dev-edition/aplicacion.png"
+           class="right"
+           alt="Chamilo Messaging"
+           width="500">
+      <ul>
+        <li>Conectarse a cualquier plataforma Chamilo LMS</li>
+        <li>Obtener mensajes no leídos</li>
+        <li>Leer mensajes con o sin conexión</li>
+      </ul>
+      <small class="credits">
+        <a href="https://github.com/chamilo/mobile-messaging">
+          Chamilo Messaging
+        </a>
+      </small>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="application-source" class="slide oneline"><div>
+    <section>
+      <header>
+        <h2><strong>HTML5 + Bootstrap</strong><br>
+          Underscore.js +<br>
+          Backbone.js +<br>
+          Require.js</h2>
+      </header>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <!-- BackboneJS start -->
+
+  <div id="backbone-intro" class="slide shout"><div>
+    <section>
+      <header>
+        <h2><div>Backbone.JS</div></h2>
+      </header>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="backbone-model-view" class="slide"><div>
+    <section>
+      <header>
+        <h2>Modelo</h2>
+      </header>
+      <ul>
+        <li>Organizar los datos y la lógica del negocio</li>
+        <li>Cargar y guardar los datos en el servidor</li>
+        <li>Emitir eventos cuando los datos del modelo cambian</li>
+      </ul>
+      <header>
+        <h2>Vista</h2>
+      </header>
+      <ul>
+        <li>Escuchar eventos y renderiza la vista</li>
+        <li>Manejar el ingreso de datos e interactividad del usuario</li>
+        <li>Enviar los datos ingresados al modelo</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="backbone-models-views" class="slide"><div>
+    <section>
+      <header>
+        <h2>Modelos y Vistas</h2>
+      </header>
+      <img src="pictures/dev-edition/model-view.svg"
+           class="middle shadow"
+           alt="Modelos y vistas">
+      <small class="credits">
+        <a href="http://backbonejs.org/#Model-View-separation">
+          Backbonejs.org
+        </a>
+      </small>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+   <div id="backbone-model-code" class="slide"><div>
+    <section>
+      <header>
+        <h2>Modelo</h2>
+      </header>
+        <pre>
+          <code>var MessageModel = Backbone.Model.extend({</code>
+          <code>    defaults: { },</code>
+          <code>    save: function (attributes) {</code>
+          <code>        var deferred = $.Deferred();</code>
+          <code>        return deferred.promise();</code>
+          <code>    },</code>
+          <code>    delete: function () {</code>
+          <code>        var deferred = $.Deferred();</code>
+          <code>        return deferred.promise();</code>
+          <code>    }</code>
+          <code>});</code>
+        </pre>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+   <div id="backbone-view-code" class="slide"><div>
+    <section>
+      <header>
+        <h2>Vista</h2>
+      </header>
+        <pre>
+          <code>var MessageTemplate = '<h2><%= subject %></h2>' +</code>
+          <code>        '<div><%= content %></div>';</code>
+          <code> </code>
+          <code>var MessageView = Backbone.View.extend({</code>
+          <code>    el: 'body',</code>
+          <code>    template: _.template(MessageTemplate),</code>
+          <code>    render: function () {</code>
+          <code>        this.el.innerHTML = this.template(this.model.toJSON());</code>
+          <code>        return this;</code>
+          <code>    }</code>
+          <code>});</code>
+        </pre>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="backbone-collection" class="slide"><div>
+    <section>
+      <header>
+        <h2>Colección</h2>
+      </header>
+      <ul>
+        <li>Grupo de modelos</li>
+        <li>Cargar y guardar nuevos modelos</li>
+        <li>Escucha eventos de cualquier modelo</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="backbone-collections-models-views" class="slide"><div>
+    <section>
+      <header>
+        <h2>Colecciones, modelos, vistas</h2>
+      </header>
+      <img src="pictures/dev-edition/collections.svg"
+           class="middle shadow"
+           alt="Colecciones">
+      <small class="credits">
+        <a href="http://backbonejs.org/#Model-Collections">
+          Backbonejs.org
+        </a>
+      </small>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+   <div id="backbone-collection-code" class="slide"><div>
+    <section>
+      <header>
+        <h2>Colección</h2>
+      </header>
+        <pre>
+          <code>var MessagesCollection = Backbone.Collection.extend({</code>
+          <code>    model: MessageModel,</code>
+          <code>    create: function (attributes) {</code>
+          <code>        var deferred = $.Deferred();</code>
+          <code>        return deferred.promise();</code>
+          <code>    },</code>
+          <code>    fetch: function () {</code>
+          <code>        var deferred = $.Deferred();</code>
+          <code>        return deferred.promise();</code>
+          <code>    }</code>
+          <code>});</code>
+        </pre>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="backbone-router" class="slide"><div>
+    <section>
+      <header>
+        <h2>Router</h2>
+      </header>
+      <img src="pictures/dev-edition/routing.svg"
+           class="middle shadow"
+           alt="Rutas">
+      <small class="credits">
+        <a href="http://backbonejs.org/#Routing">
+          Backbonejs.org
+        </a>
+      </small>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+   <div id="backbone-router-code" class="slide"><div>
+    <section>
+      <header>
+        <h2>Router</h2>
+      </header>
+        <pre>
+          <code>var Router = Backbone.Router.extend({</code>
+          <code>    routes: {</code>
+          <code>        '': 'showIndex',</code>
+          <code>        'message/:id': 'showMessage',</code>
+          <code>        'logout': 'showLogout'</code>
+          <code>    }</code>
+          <code>});</code>
+          <code>var router = new Router;</code>
+          <code>router.on('route:showIndex', function (){ });</code>
+          <code>router.on('route:showMessage', function (messageId){ });</code>
+          <code>router.on('route:showLogout', function (){ });</code>
+          <code>Backbone.history.start();</code>
+        </pre>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <!-- BackboneJS end -->
+  <!-- DevEdition start -->
+
+  <div id="firefox-intro" class="slide shout"><div>
+    <section>
+      <header>
+        <h2><div>Developer Edition</div></h2>
+      </header>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-borrador" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Borrador</h2>
+      </header>
+      <img src="pictures/dev-edition/borrador.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-borrador-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Borrador</h2>
+      </header>
+      <ul class="inner">
+        <li class="active">Editar JavaScript en vivo</li>
+        <li>Prototipado</li>
+        <li>Ejecutar código</li>
+        <li>Inspeccionar objetos</li>
+        <li>Guardar scripts</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-estilos" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Editor de estilos</h2>
+      </header>
+      <img src="pictures/dev-edition/estilos.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-estilos-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Editor de estilos</h2>
+      </header>
+      <ul class="inner">
+        <li class="active">Editar, depurar y crear nuevas hojas de estilos</li>
+        <li>Cambios reflejados automáticamente</li>
+        <li>Ejecutar código</li>
+        <li>Guardar cambios</li>
+        <li>Importar archivos</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-red" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Monitor de red</h2>
+      </header>
+      <img src="pictures/dev-edition/red.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-almacenamiento" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Inspector de almacenamiento</h2>
+      </header>
+      <img src="pictures/dev-edition/almacenamiento.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-dom" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Inspector de DOM y estilos</h2>
+      </header>
+      <img src="pictures/dev-edition/dom.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-consola" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Consola</h2>
+      </header>
+      <img src="pictures/dev-edition/consola.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-consola-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Consola</h2>
+      </header>
+      <ul class="inner">
+        <li class="active">Información asociada a la página web</li>
+        <li>Advertencias CSS/JavaScript</li>
+        <li>Errores CSS/JavaScript</li>
+        <li>Seguridad</li>
+        <li>Peticiones de red</li>
+      </ul>
+      <ul class="oneline">
+        <li>Barra de herramientas</li>
+        <li>Línea de comandos</li>
+        <li>Panel de mensajes</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-depurador" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Depurador</h2>
+      </header>
+      <img src="pictures/dev-edition/depurador.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-depurador-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Depurador</h2>
+      </header>
+      <ul class="inner">
+        <li class="active">Depuración</li>
+        <li>Refinación</li>
+        <li>Vigilancia de expresiones</li>
+        <li>Alcance de variables</li>
+        <li>Puntos de ruptura</li>
+        <li>Avance, salto de pasos</li>
+        <li>Cambiar valores de variables</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-adaptable" class="slide cover w"><div>
+    <section>
+      <header>
+        <h2>Vista de diseño adaptable</h2>
+      </header>
+      <img src="pictures/dev-edition/adaptable.png"
+           class="middle"
+           alt="Firefox OS phones">
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div id="firefox-adaptable-intro" class="slide"><div>
+    <section>
+      <header>
+        <h2>Vista de diseño adaptable</h2>
+      </header>
+      <ul class="inner">
+        <li class="active">Diseños en diferentes tamaño de pantalla</li>
+        <li>Cambiar tamaño</li>
+        <li>Cambiar orientación</li>
+        <li>Capturar pantalla</li>
+        <li>Eventos de toque</li>
+      </ul>
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <!-- DevEdition end -->
+
+  <div id="thanks" class="slide"><div>
+    <section>
+      <header>
+        <h2>Gracias</h2>
+      </header>
+      <!-- img src="pictures/mozillaoverview/redpanda.jpg" class="right" alt="Red panda (Firefox)" -->
+      <ul class="nobull">
+        <li>Angel Fernando Quiroz Campos</li>
+        <li>Mozilla Perú</li>
+        <li><a href="http://twitter.com/AngelFQC">@AngelFQC</a></li>
+        <li>
+          <strong>Slides</strong>:
+          <a href="https://angelfqc.github.io/fx-dev-edition">angelfqc.github.io/fx-dev-edition</a>
+        </li>
+      </ul>
+      <!-- small class="credits">
+        <a href="http://www.flickr.com/photos/yortw/5798336827/">Photo by Yortw</a>
+      </small -->
+
+      <footer class="notes">
+      </footer>
+    </section>
+  </div></div>
+
+  <div class="progress"><div></div></div>
+  <div id="langMenuDivId"></div>
+  <script src="scripts/script.js"></script>
+  <!-- Copyright © 2010–2012 Vadim Makeev — pepelsbey.net -->
+</body>
+</html>

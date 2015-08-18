@@ -1,0 +1,36 @@
+<p>
+    <img class="center-block" src="img/logo.png" alt="Chamilo Messaging">
+</p>
+
+<div id="div-alert"></div>
+
+<form action="#" id="frm-login" method="post">
+    <fieldset>
+        <legend>Host</legend>
+        <div class="form-group">
+            <label class="sr-only">Dominio</label>
+            <input type="url" name="hostname" id="txt-hostname" required class="form-control" placeholder="https://">
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Cuenta</legend>
+        <div class="form-group">
+            <label class="sr-only">Nombre de usuario</label>
+            <input type="text" name="username" id="txt-username" required class="form-control" placeholder="Username">
+            <label class="sr-only">Contraseña</label>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group">
+                        <input type="password" id="txt-password" required name="password" class="form-control" placeholder="Contraseña">
+                        <span class="input-group-addon">
+                            <input type="checkbox" id="chk-password">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <button class="btn btn-primary btn-lg btn-block" id="btn-submit" type="submit">Iniciar sesión</button>
+    </div>
+</form>
